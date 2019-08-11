@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,8 +16,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import FolderList from './list';
-import OutlinedButtons from './button'
+// import FolderList from './list';
+import OutlinedButtons from './button';
+import Grid from '@material-ui/core/Grid';
 
 
 const drawerWidth = 240;
@@ -83,15 +84,19 @@ const useStyles = makeStyles(theme => ({
 
 // 
 
-const Text = () => {
-    return <textarea   aria-label="empty textarea" placeholder="Empty" style={{height:406, margin: 0, width: 890}}></textarea>;
-}
+
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [cod,setcod] = useState("");
+  const [inp,setinp] = useState("");
+  const [tak,setak] = useState("");
 
+  function callback(dat){
+    setak(dat)
+  }
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -160,15 +165,24 @@ export default function PersistentDrawerLeft() {
     >
       >
         <div className={classes.drawerHeader} />
-        <Text />
+        <textarea   aria-label="empty textarea" placeholder="ENTER CODE" style={{height:406, margin: 0, width: 890}} value={cod} onChange={e=>setcod(e.target.value)}></textarea>
+        
+        <Grid container spacing={5}>
+          <Grid item xs={5}>
+          <textarea   aria-label="empty textarea" placeholder="ENTER INPUT" style={{marginTop:20,height:206, width: 350}} value={inp} onChange={e=>setinp(e.target.value)}></textarea>
+          </Grid>
+          <Grid item xs={5}>
+          <textarea   aria-label="empty textarea" placeholder="OUTPUT" style={{height:206, marginTop: 20, width: 350}} value={tak}></textarea>
+          </Grid>
+        </Grid>
       </main>
       
       <div style={{alignSelf:'center', margin:20}}> 
-      <OutlinedButtons name="C" />
-      <OutlinedButtons name="C++" />
-      <OutlinedButtons name="PYTHON" />
-      <OutlinedButtons name="JAVA" />
-      <OutlinedButtons name="JAVASCRIPT" />
+      <OutlinedButtons name="C" lang="c" co={cod} in={inp} call={callback}/>
+      <OutlinedButtons name="C++" lang="cpp14" co={cod} in={inp} call={callback}/>
+      <OutlinedButtons name="PYTHON" lang="python3" co={cod} in={inp} call={callback}/>
+      <OutlinedButtons name="JAVA" lang="java" co={cod} in={inp} call={callback}/>
+      <OutlinedButtons name="NODE JS" lang="nodejs" co={cod} in={inp} call={callback}/>
       </div>
       
 

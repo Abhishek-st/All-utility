@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function OutlinedButtons(props) {
     const classes = useStyles();
-    
-    function submit(){
+
+    function submit(lang,scr,inp){
       var request = require('request');
       var program = {
-          script : `a=input('')\nprint(a)`,
-          language: "python3",
-          stdin:"ast",
+          script : scr,
+          language: lang,
+          stdin: inp,
           versionIndex: "0",
           clientId: "7a44198107b7f42b95724a3f9abf98a3",
           clientSecret:"cf48176249d4b71363f707d11cbef5d2242feff1890ffcf6fd5db8586c47a9bf"
@@ -38,17 +38,16 @@ export default function OutlinedButtons(props) {
           console.log('statusCode:', response && response.statusCode);
           console.log('body:', body);
           console.log(body.output);
+          props.call(body.output);
       });
     }
 
     return (
       <div>
 
-        <Button variant="outlined" color="primary" className={classes.button} onClick={()=>submit()}>
+        <Button variant="outlined" color="primary" className={classes.button} onClick={()=>submit(props.lang, props.co, props.in)}>
           {props.name}
         </Button>
-        
-
       </div>
     );
   }
