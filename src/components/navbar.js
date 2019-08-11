@@ -101,6 +101,7 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   }
 
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -163,11 +164,11 @@ export default function PersistentDrawerLeft() {
       </main>
       
       <div style={{alignSelf:'center', margin:20}}> 
-      <OutlinedButtons name="C"/>
-      <OutlinedButtons name="C++"/>
-      <OutlinedButtons name="PYTHON"/>
-      <OutlinedButtons name="JAVA"/>
-      <OutlinedButtons name="JAVASCRIPT"/>
+      <OutlinedButtons name="C" />
+      <OutlinedButtons name="C++" />
+      <OutlinedButtons name="PYTHON" />
+      <OutlinedButtons name="JAVA" />
+      <OutlinedButtons name="JAVASCRIPT" />
       </div>
       
 
