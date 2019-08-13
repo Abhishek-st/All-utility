@@ -9,6 +9,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.0.1",
+    "react-speech-kit": "^2.0.2",
     "unirest": "^0.6.0"
   },
   "scripts": {

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PersistentDrawerLeft from './components/navbar';
+import { useSpeechSynthesis } from "react-speech-kit";
 
 
-export default class App extends React.Component{
-
-  // componentDidMount(){
+export default function App() {
   //     var request = require('request');
   //     var program = {
   //         script : `a=input('')\nprint(a)`,
@@ -26,15 +25,23 @@ export default class App extends React.Component{
   //         console.log('body:', body);
   //         console.log(body.output);
   //     });
-      
-      
-  // }
+    
 
-  render(){
+  const [value, setValue] = useState("");
+  const { speak,voices } = useSpeechSynthesis();
+  
+
     return(
       <div>
         <PersistentDrawerLeft />
+        <div>
+          <textarea
+            value={value}
+            onChange={event => setValue(event.target.value)}
+          />
+          <button onClick={() => speak({ text: value,voice: voices[10]})}>Speak</button>
+          </div>
       </div>
     )
-  }
+
 }
